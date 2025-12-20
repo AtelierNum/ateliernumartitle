@@ -1,14 +1,60 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <title>AR Particle Text Effect</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    
+    <!-- A-Frame and AR.js -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Import Map for Modern JS Modules -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/jsm/"
+      }
+    }
+    </script>
+
+    <!-- Load main logic as a module -->
+    <script type="module" src="main.js"></script>
 </head>
-<body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+<body style="margin: 0; overflow: hidden;">
+    <div id="ui-container">
+        <div class="control-group">
+            <label for="font-select">Select Font</label>
+            <select id="font-select">
+                <option value="">Loading fonts...</option>
+            </select>
+        </div>
+        <button id="explode-button">Explode</button>
+    </div>
+
+    <a-scene embedded 
+             arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+             renderer="logarithmicDepthBuffer: true; antialias: true; alpha: true;">
+
+        <a-entity light="type: ambient; color: #FFF; intensity: 1.2"></a-entity>
+        <a-entity light="type: directional; color: #FFF; intensity: 1.0" position="-1 2 1"></a-entity>
+
+        <!-- Using barcode marker value 0 -->
+        <a-marker type="barcode" value="0">
+            <a-entity 
+                id="particle-text-entity"
+                particle-text="text: ATELIERNUM; density: 500; particleSize: 0.035; textSize: 0.35; scatterRadius: 8.5; color: #00f2ff;" 
+                rotation="-90 0 0" 
+                position="0 0.5 0">
+            </a-entity>
+        </a-marker>
+
+        <a-entity camera></a-entity>
+    </a-scene>
 </body>
 </html>
