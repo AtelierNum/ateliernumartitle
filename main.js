@@ -1,5 +1,6 @@
 
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { GUI } from 'lil-gui';
 
 const FONTS = {
     'Droid Sans': 'https://unpkg.com/three@0.125.0/examples/fonts/droid/droid_sans_regular.typeface.json',
@@ -166,6 +167,28 @@ AFRAME.registerComponent('particle-text', {
 
         this.setupEventListeners();
         this.loadFont();
+        this.initGui();
+    },
+
+    initGui: function() {
+        const gui = new GUI();
+        const uniforms = this.material.uniforms;
+
+        gui.add(uniforms.chromaticAberration, 'value', 0, 1).name('Chromatic Aberration');
+        gui.add(uniforms.opacity, 'value', 0, 1).name('Opacity');
+        gui.add(uniforms.fresnelBias, 'value', 0, 1).name('Fresnel Bias');
+        gui.add(uniforms.fresnelScale, 'value', 0, 10).name('Fresnel Scale');
+        gui.add(uniforms.fresnelPower, 'value', 0, 10).name('Fresnel Power');
+        gui.add(uniforms.iridescenceIntensity, 'value', 0, 1).name('Iridescence Intensity');
+        gui.add(uniforms.iridescenceSpeed, 'value', 0, 5).name('Iridescence Speed');
+        gui.addColor(uniforms.glowColor, 'value').name('Glow Color');
+        gui.add(uniforms.glowInternal, 'value', 0, 1).name('Glow Internal');
+        gui.add(uniforms.glowSharpness, 'value', 0, 5).name('Glow Sharpness');
+        gui.add(uniforms.emissiveIntensity, 'value', 0, 1).name('Emissive Intensity');
+        gui.addColor(uniforms.rimColor, 'value').name('Rim Color');
+        gui.add(uniforms.rimPower, 'value', 0, 10).name('Rim Power');
+        gui.add(uniforms.rimStrength, 'value', 0, 2).name('Rim Strength');
+        gui.hide()
     },
 
     setupEventListeners: function() {
