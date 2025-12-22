@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>AR Particle Text Effect</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    
+
     <!-- A-Frame and AR.js -->
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    
+
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
 
@@ -42,31 +43,29 @@
         Modern A-Frame 1.7.1 uses physicallyCorrectLights by default, 
         but we explicitly set renderer properties for best glass results.
     -->
-    <a-scene embedded 
-             arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
-             renderer="antialias: true; alpha: true; colorManagement: true; physicallyCorrectLights: true; exposure: 1.2;">
-
- 
-        <a-marker type="barcode" value="14">
+    <a-scene embedded
+        arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+        renderer="antialias: true; alpha: true; colorManagement: true; physicallyCorrectLights: true; exposure: 1.2;">
 
 
-                  <a-entity 
-                id="particle-text-entity"
-                particle-text="text:     > > > > > >    ; density: 1100; particleSize: 0.04; textSize: 0.45; scatterRadius: 20.0;" 
-                rotation="-90 0 0" 
-                position="0 0.5 -0.50">
+        <a-marker type="barcode" value="0">
+
+
+            <a-entity id="particle-text-entity"
+                particle-text="text:     > > > > > >    ; density: 200; particleSize: 0.03; textSize: 0.5; scatterRadius: 20.0;"
+                animation="property: rotation; to: -90 0 0; dur: 2000; easing: easeOutElastic; loop: true"
+                rotation="0 0 0" position="0 0.5 -0.70">
             </a-entity>
 
-                        <a-entity 
-                id="particle-text-entity"
-                particle-text="text: A t e l i e r n u m ; density: 1100; particleSize: 0.03; textSize: 0.35; scatterRadius: 10.0;" 
-                 animation="property: position; to: 2 0.5 0; dur: 3000; easing: linear; loop: true"
-                rotation="-90 0 0" 
-                position="-2 0.5 0">
+            <a-entity id="particle-text-entity"
+                particle-text="text: A t e l i e r n u m ; density: 500; particleSize: 0.06; textSize: 0.8; scatterRadius: 10.0;"
+                animation="property: position; to: -7 0.5 0; dur: 9000; easing: linear; loop: true" rotation="-90 0 0"
+                position="7 0.5 0">
             </a-entity>
         </a-marker>
 
         <a-entity camera></a-entity>
     </a-scene>
 </body>
+
 </html>
